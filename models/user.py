@@ -1,14 +1,7 @@
-#sqlalchemy agarra toda la clase y la inserta
-
-from sqlalchemy import Column, String, Integer
-from db import Base, engine
+from config.db.postgres.config import db
 
 
-class User(Base):
-    __table_name__ = 'user'
-    id = Column(Integer, autoincrement=True, primary_key=True)
-    username = Column(String(70), unique=True)
-    password = Column(String(70))
-
-
-#Base.metadata.create_all(engine)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    username = db.Column(db.String(16), unique=True, nullable=False)
+    password = db.Column(db.String(64), nullable=False)
